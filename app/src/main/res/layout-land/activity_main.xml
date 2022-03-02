@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:padding="32dp"
+    android:gravity="bottom|center_horizontal"
     android:orientation="vertical">
 
     <TextView
@@ -17,6 +18,7 @@
         style="?android:attr/buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
         android:orientation="horizontal">
 
         <Button
@@ -24,7 +26,7 @@
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginHorizontal="16dp"
             android:text="@string/true_button" />
 
         <Button
@@ -32,15 +34,9 @@
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginHorizontal="16dp"
             android:text="@string/false_button" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/answer_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
 
     <Button
         android:id="@+id/cheat_button"
@@ -51,14 +47,16 @@
         android:text="@string/cheat_button" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="bottom"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/previous_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
+            android:layout_marginHorizontal="64dp"
             android:layout_weight="1"
             android:contentDescription="previous question button icon"
             app:srcCompat="@drawable/navigate_prev" />
@@ -66,7 +64,8 @@
         <ImageButton
             android:id="@+id/next_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
+            android:layout_marginHorizontal="64dp"
             android:layout_weight="1"
             android:contentDescription="next question button icon"
             app:srcCompat="@drawable/navigate_next" />

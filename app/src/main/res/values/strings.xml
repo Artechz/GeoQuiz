@@ -14,6 +14,7 @@
     </string-array>
     <string name="true_button">TRUE</string>
     <string name="false_button">FALSE</string>
+    <string name="cheat_button">CHEAT</string>
     <string name="correct_feedback">Correct!</string>
     <string name="wrong_feedback">Wrong!</string>
     <string name="game_over">No more questions!</string>
