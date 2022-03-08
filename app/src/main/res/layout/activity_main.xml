@@ -6,69 +6,97 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/question_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="24dp"
-        android:text="loading..." />
-
     <LinearLayout
-        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="1">
 
-        <Button
-            android:id="@+id/true_button"
+        <TextView
+            android:id="@+id/question_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:text="loading..." />
+
+        <LinearLayout
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:text="@string/true_button" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/true_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="@string/true_button" />
+
+            <Button
+                android:id="@+id/false_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="@string/false_button" />
+        </LinearLayout>
 
         <Button
-            android:id="@+id/false_button"
+            android:id="@+id/cheat_button"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:text="@string/false_button" />
+            android:layout_margin="8dp"
+            android:text="@string/cheat_button" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/previous_button"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:contentDescription="previous question button icon"
+                app:srcCompat="@drawable/navigate_prev" />
+
+            <ImageButton
+                android:id="@+id/next_button"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:contentDescription="next question button icon"
+                app:srcCompat="@drawable/navigate_next" />
+        </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/answer_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
-
-    <Button
-        android:id="@+id/cheat_button"
-        style="?android:attr/buttonBarButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:text="@string/cheat_button" />
-
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_weight="0"
+        android:orientation="vertical"
+        android:gravity="bottom|left">
 
-        <ImageButton
-            android:id="@+id/previous_button"
+        <TextView
+            android:id="@+id/info_question_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="previous question button icon"
-            app:srcCompat="@drawable/navigate_prev" />
+            android:text="@string/info_question_num" />
 
-        <ImageButton
-            android:id="@+id/next_button"
+        <TextView
+            android:id="@+id/info_question_num_answered"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="next question button icon"
-            app:srcCompat="@drawable/navigate_next" />
+            android:text="@string/info_questions_answered" />
+
+        <TextView
+            android:id="@+id/info_question_percent_correct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>

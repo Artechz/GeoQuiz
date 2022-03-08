@@ -5,17 +5,22 @@
         <item>Is Barcelona the capital of Spain?</item>
         <item>Is Canada bigger than Russia?</item>
         <item>Is Mexico in America?</item>
+        <item>Is there any country in more than one continent?</item>
     </string-array>
     <string-array name="answers">
         <item>TRUE</item>
         <item>FALSE</item>
         <item>FALSE</item>
         <item>TRUE</item>
+        <item>TRUE</item>
     </string-array>
     <string name="true_button">TRUE</string>
     <string name="false_button">FALSE</string>
     <string name="cheat_button">CHEAT</string>
+    <string name="back_button">GO BACK</string>
     <string name="correct_feedback">Correct!</string>
     <string name="wrong_feedback">Wrong!</string>
     <string name="game_over">No more questions!</string>
+    <string name="info_question_num">question_num: </string>
+    <string name="info_questions_answered">answered questions: </string>
 </resources>

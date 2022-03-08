@@ -2,6 +2,8 @@ package edu.url.salle.arnau.sf.pp2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -16,16 +18,19 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "LogLifecycleCallbacks";
     private static final String KEY_INDEX = "index";
 
-    private Button mTrueButton;
-    private Button mFalseButton;
-    private Button mCheatButton;
-    private ImageButton mNextButton;
-    private ImageButton mPrevButton;
-    private TextView mQuestionText;
-    private TextView mAnswerText;
+    private static final int REQUEST_CHEATED = 0;
 
-    private ArrayList<Question> questions = new ArrayList<>();
-    private int questionsIndex = 0;
+    private Button buttonTrue;
+    private Button buttonFalse;
+    private Button buttonCheat;
+    private ImageButton imgbuttonNext;
+    private ImageButton imgbuttonPrev;
+    private TextView txtviewQuestion;
+
+    private ArrayList<Question> rQuestions = new ArrayList<>();
+    private int nQuestionsIndex = 0;
+
+    private boolean bHasCheated;
 
     @Override
     protected void onStart() {
@@ -61,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle savedInsanceState) {
         super.onSaveInstanceState(savedInsanceState);
         Log.i(TAG, "onSaveInstanceState() called");
-        savedInsanceState.putInt(KEY_INDEX, questionsIndex);
+        savedInsanceState.putInt(KEY_INDEX, nQuestionsIndex);
     }
 
     @Override
@@ -71,74 +76,81 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState != null)
-            questionsIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+            nQuestionsIndex = savedInstanceState.getInt(KEY_INDEX, 0);
 
-        mTrueButton = findViewById(R.id.true_button);
-        mFalseButton = findViewById(R.id.false_button);
-        mCheatButton = findViewById(R.id.cheat_button);
-        mAnswerText = findViewById(R.id.answer_text);
-        mNextButton = findViewById(R.id.next_button);
-        mPrevButton = findViewById(R.id.previous_button);
-        mQuestionText = findViewById(R.id.question_text);
+        buttonTrue = findViewById(R.id.true_button);
+        buttonFalse = findViewById(R.id.false_button);
+        buttonCheat = findViewById(R.id.cheat_button);
+        imgbuttonNext = findViewById(R.id.next_button);
+        imgbuttonPrev = findViewById(R.id.previous_button);
+        txtviewQuestion = findViewById(R.id.question_text);
 
-        String[] qs = getResources().getStringArray(R.array.questions);
         String[] as = getResources().getStringArray(R.array.answers);
-
         //instancing Question objects from q&a string arrays in Resources.
         int i = 0;
-        for (String s : qs) {
-            questions.add(new Question(s, as[i++]));
+        for (String s : getResources().getStringArray(R.array.questions)) {
+            rQuestions.add(new Question(s, as[i++]));
         }
 
-        mQuestionText.setText(questions.get(questionsIndex).getText());
+        txtviewQuestion.setText(rQuestions.get(nQuestionsIndex).getText());
 
-        mTrueButton.setOnClickListener(v -> {
-            if (questions.get(questionsIndex).isCorrect("TRUE"))
+        buttonTrue.setOnClickListener(v -> {
+            if (rQuestions.get(nQuestionsIndex).isCorrect("TRUE"))
                 Toast.makeText(MainActivity.this, R.string.correct_feedback, Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(MainActivity.this, R.string.wrong_feedback, Toast.LENGTH_SHORT).show();
             if(!nextQuestion()) Toast.makeText(MainActivity.this, R.string.game_over, Toast.LENGTH_SHORT).show();
         });
 
-        mFalseButton.setOnClickListener(v -> {
-            if (questions.get(questionsIndex).isCorrect("FALSE"))
+        buttonFalse.setOnClickListener(v -> {
+            if (rQuestions.get(nQuestionsIndex).isCorrect("FALSE"))
                 Toast.makeText(MainActivity.this, R.string.correct_feedback, Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(MainActivity.this, R.string.wrong_feedback, Toast.LENGTH_SHORT).show();
             if(!nextQuestion()) Toast.makeText(MainActivity.this, R.string.game_over, Toast.LENGTH_SHORT).show();
         });
 
-        mCheatButton.setOnClickListener(v -> {
-            mAnswerText.setText(questions.get(questionsIndex).getAnswer());
+        buttonCheat.setOnClickListener(v -> {
+            startActivityForResult(CheatActivity.newIntent(MainActivity.this, rQuestions.get(nQuestionsIndex).getAnswer(), rQuestions.get(nQuestionsIndex).getText()), REQUEST_CHEATED);
         });
 
-        mNextButton.setOnClickListener(v -> {
+        imgbuttonNext.setOnClickListener(v -> {
             if(!nextQuestion()) Toast.makeText(MainActivity.this, R.string.game_over, Toast.LENGTH_SHORT).show();
         });
 
-        mPrevButton.setOnClickListener(v -> previousQuestion());
+        imgbuttonPrev.setOnClickListener(v -> previousQuestion());
 
-        mQuestionText.setOnClickListener(v -> nextQuestion());
+        txtviewQuestion.setOnClickListener(v -> nextQuestion());
 
     }
 
     private boolean nextQuestion() {
-        if (questionsIndex >= questions.size()-1) return false;
+        if (nQuestionsIndex >= rQuestions.size()-1) return false;
         else {
-            mAnswerText.setText("");
-            questionsIndex++;
-            mQuestionText.setText(questions.get(questionsIndex).getText());
+            nQuestionsIndex++;
+            txtviewQuestion.setText(rQuestions.get(nQuestionsIndex).getText());
             return true;
         }
     }
 
     private boolean previousQuestion() {
-        if (questionsIndex <= 0) return false;
+        if (nQuestionsIndex <= 0) return false;
         else {
-            mAnswerText.setText("");
-            questionsIndex--;
-            mQuestionText.setText(questions.get(questionsIndex).getText());
+            nQuestionsIndex--;
+            txtviewQuestion.setText(rQuestions.get(nQuestionsIndex).getText());
             return true;
         }
+    }
+
+    @Override
+    protected void onActivityResult (int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (resultCode  != Activity.RESULT_OK) return;
+        if (requestCode == REQUEST_CHEATED) {
+            if (intent == null) return;
+            bHasCheated = CheatActivity.wasAnswerShown(intent);
+        }
+
+
     }
 }
