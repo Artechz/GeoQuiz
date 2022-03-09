@@ -28,4 +28,7 @@ public class Question {
         return answered;
     }
 
+    public void resetAnswered() {
+        answered = false;
+    }
 }

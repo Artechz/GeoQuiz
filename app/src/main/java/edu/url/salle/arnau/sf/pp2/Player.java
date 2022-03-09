@@ -9,6 +9,12 @@ public class Player {
         name = nickname;
     }
 
+    public Player(String nickname, int points, boolean tramposo) {
+        name = nickname;
+        score = points;
+        cheater = tramposo;
+    }
+
     public void justCheated(boolean didCheat) {
         cheater = didCheat;
     }

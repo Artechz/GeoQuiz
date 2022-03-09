@@ -155,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             if (rQuestions.get(nQuestionsIndex).isCorrect(choice)) {
                 Toast.makeText(MainActivity.this, R.string.correct_feedback, Toast.LENGTH_SHORT).show();
+                players[nPlayersIndex].addPoint();
             } else
                 Toast.makeText(MainActivity.this, R.string.wrong_feedback, Toast.LENGTH_SHORT).show();
             nAnsweredQuestions++;
@@ -163,7 +164,11 @@ public class MainActivity extends AppCompatActivity {
                 if (bMultiplayer && nPlayersIndex == 0) {
                     //player 2 plays
                     nPlayersIndex++;
+                    nQuestionsIndex = 0;
                     nAnsweredQuestions = 0;
+                    for(Question q : rQuestions) {
+                        q.resetAnswered();
+                    }
                     updateInfo();
                 //else endGame();
                 } else {
