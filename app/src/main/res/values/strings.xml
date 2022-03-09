@@ -14,13 +14,25 @@
         <item>TRUE</item>
         <item>TRUE</item>
     </string-array>
+    <!--Buttons-->
     <string name="true_button">TRUE</string>
     <string name="false_button">FALSE</string>
     <string name="cheat_button">CHEAT</string>
     <string name="back_button">GO BACK</string>
+    <!--Feedback-->
     <string name="correct_feedback">Correct!</string>
     <string name="wrong_feedback">Wrong!</string>
+    <string name="question_answered">Question already answered!</string>
     <string name="game_over">No more questions!</string>
-    <string name="info_question_num">question_num: </string>
-    <string name="info_questions_answered">answered questions: </string>
+    <!--Info-->
+    <string name="info_player_turn">%1$s\'s round</string>
+    <string name="info_question_num">question: %1$d/%2$d</string>
+    <string name="info_questions_answered">answered: %1$d/%2$d (%3$d%%)</string>
+    <string name="info_has_cheated">cheater: %1$b</string>
+    <!--Register-->
+    <string name="register_player_name">Player nickname</string>
+    <string name="register_multiplayer">Multiplayer game?</string>
+    <string name="play_button">PLAY</string>
+    <!--Results-->
+    <string name="result_player">%1$s: %2$d points</string>
 </resources>

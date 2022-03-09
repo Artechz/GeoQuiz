@@ -4,6 +4,7 @@ public class Question {
 
     private final String text;
     private final String answer;
+    private boolean answered = false;
 
     public Question(String text, String answer) {
         this.text = text;
@@ -11,6 +12,7 @@ public class Question {
     }
 
     public boolean isCorrect(String userAnswer) {
+        answered = true;
         return userAnswer.equals(answer);
     }
 
@@ -21,4 +23,9 @@ public class Question {
     public String getAnswer() {
         return answer;
     }
+
+    public boolean beenAnswered() {
+        return answered;
+    }
+
 }
